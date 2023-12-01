@@ -43,29 +43,30 @@ console.log(url);
 fetch(url) 
   .then(response => response.json())
   .then(data => {
+    console.log(data);
     // We will impliment something later...
   });
 
-  const getFlickrImageURL = (photo, size) => {
-    let url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${
-      photo.secret
-    }`;
-    if (size) {
-      // Configure image size
-      url += `_${size}`;
-    }
-    url += '.jpg';
-    return url;
-  };
+//   const getFlickrImageURL = (photo, size) => {
+//     let url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${
+//       photo.secret
+//     }`;
+//     if (size) {
+//       // Configure image size
+//       url += `_${size}`;
+//     }
+//     url += '.jpg';
+//     return url;
+//   };
   
-  axios.get(url)
-    .then(response => response.json())
-    .then(data => (
-      // get an array of image-url
-      data.photos.photo.map((photo) => {
-        return getFlickrImageURL(photo, 'q');
-      })
-    ));
+//   axios.get(url)
+//     .then(response => response.json())
+//     .then(data => (
+//       // get an array of image-url
+//       data.photos.photo.map((photo) => {
+//         return getFlickrImageURL(photo, 'q');
+//       })
+//     ));
 
 // // FOR FLICKR //
 
@@ -78,19 +79,19 @@ fetch(url)
 // // Once request has loaded...
 // xhr.onload = function() {
 //     // Parse the request into JSON
-//     var data = JSON.parse(this.response);
+//     var wikiData = JSON.parse(this.response);
 
 //     // Log the data object
-//     console.log(data);
+//     console.log(wikiData);
 
-//     // Log the page objects
-//     console.log(data.query.pages)
+// //     // Log the page objects
+// //     console.log(data.query.pages)
 
-//     // Loop through the data object
-//     // Pulling out the titles of each page
-//     for (var i in data.query.pages) {
-//         console.log(data.query.pages[i].title);
-//     }
-// }
+// //     // Loop through the data object
+// //     // Pulling out the titles of each page
+// //     for (var i in data.query.pages) {
+// //         console.log(data.query.pages[i].title);
+// //     }
+}
 // // Send request to the server
 // xhr.send();
