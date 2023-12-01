@@ -1,0 +1,27 @@
+header {
+    margin-bottom: 5vh;
+}
+
+.search-bar {
+    margin-top: 3vh;
+}
+
+.search-bar {
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+
+.credits {
+    text-align: center;
+    background: powderblue;
+    border-radius: 20px;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 1vh;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.img {
+    width: 70px;
+}
