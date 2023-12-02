@@ -24,8 +24,6 @@ const yourApiKey = 'c4aaaedd99b8d8b5a0ee032443cea286';
 
 const apiUrl = 'https://api.flickr.com/services/rest/';
 
-const tag = document.getElementById('search-bar').value
-
 const data = {
   
   method: 'flickr.photos.search',
@@ -50,15 +48,14 @@ fetch(url)
   .then(response => response.json())
   .then(data => {    
     const photos = data.photos.photo;
-    const photoContainer = document.getElementById('featured-star')
 
-    photoContainer.innerHTML = ''
+    featuredStar.innerHTML = ''
 
     photos.forEach(photo => {
       const img = document.createElement('img');
       img.src = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
       img.alt = photo.title;
-      photoContainer.appendChild(img);
+      featuredStar.appendChild(img);
     })
     console.log(data);
     // We will impliment something later...
