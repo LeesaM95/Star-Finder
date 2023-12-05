@@ -58,6 +58,8 @@ searchButton.onclick = function() {
   
 }
 
+//test-of-branch
+
 //   const getFlickrImageURL = (photo, size) => {
 //     let url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${
 //       photo.secret
