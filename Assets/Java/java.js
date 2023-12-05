@@ -1,50 +1,59 @@
 // STEP ONE: DEFINE VARIABLES
 var searchBar = document.getElementById("search-bar");
 var featuredStar = document.getElementById("featured-star");
+var srchBtn = document.getElementById("search-button");
 
-// STEP TWO: SET UP SEARCH FUNCTIONS
-// TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
-// TWO B: DEFINE SEARCH FUNCTION FOR FLICKR
-
-// STEP THREE: 
-
-
-
-
-
-
-
-
-
-
-
-
-// // FOR FLICKR //
-const yourApiKey = 'c4aaaedd99b8d8b5a0ee032443cea286';
-const data = {
-  
+var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
+var flickrData = {
   method: 'flickr.photos.search',
-  api_key: yourApiKey,
+  api_key: apiKeyFlickr,
   text: ' ', // Search Text
-  sort: 'interestingness-desc',
-  per_page: 12,
-  license: '4',
+  content_types: 0,
+  geo_context: 2,
+  per_page: 3,
   extras: 'owner_name,license',
   format: 'json',
   nojsoncallback: 1,
 };
+var flickrParameters = new URLSearchParams(flickrData);
+var flickrUrl = `https://api.flickr.com/services/rest/?${flickrParameters}`;
 
-const parameters = new URLSearchParams(data);
+var apiKeyWiki = 'fd4bfdb503018e4083550a93176323b0'
+var wikiData = {
+    language_code: 'en',
+    action: 'query',
+    list: 'search',
+    srsearch: ' ',
+    format: 'json',
+    number_of_results: 1,
+    base_Url: 'https://api.wikimedia.org/core/v1/wikipedia/',
+    endpoint: '/search/page',
+    
+};
 
-const url = `https://api.flickr.com/services/rest/?${parameters}`;
-console.log(url);
+var wikiParameters = new URLSearchParams(wikiData);
+var wikiUrl = `http://en.wikipedia.org/w/api.php${wikiParameters}`;
 
 
-fetch(url) 
+
+// STEP TWO: SET UP SEARCH FUNCTIONS
+// TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
+// fetch(wikiUrl) 
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log(data);
+//     // We will impliment something later...
+//   });
+
+
+// TWO B: DEFINE SEARCH FUNCTION FOR FLICKR
+fetch(flickrUrl) 
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    console.log(data)
     // We will impliment something later...
+    
+            
   });
 
 //   const getFlickrImageURL = (photo, size) => {
@@ -69,29 +78,3 @@ fetch(url)
 //     ));
 
 // // FOR FLICKR //
-
-// // FOR WIKIPEDIA //
-// var xhr = new XMLHttpRequest();
-
-// // Open a new connection, using the GET request on the URL endpoint
-// // Providing 3 arguments (GET/POST, The URL, Async True/False)
-// xhr.open('GET', url, true);
-// // Once request has loaded...
-// xhr.onload = function() {
-//     // Parse the request into JSON
-//     var wikiData = JSON.parse(this.response);
-
-//     // Log the data object
-//     console.log(wikiData);
-
-// //     // Log the page objects
-// //     console.log(data.query.pages)
-
-// //     // Loop through the data object
-// //     // Pulling out the titles of each page
-// //     for (var i in data.query.pages) {
-// //         console.log(data.query.pages[i].title);
-// //     }
-}
-// // Send request to the server
-// xhr.send();
