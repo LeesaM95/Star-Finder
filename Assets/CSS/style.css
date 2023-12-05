@@ -1,0 +1,34 @@
+header {
+    margin-bottom: 5vh;
+}
+
+#star-logo {
+    color: #fff;
+    font-family: 'Audiowide', sans-serif;
+    font-size: 50px;
+    font-style: italic;
+}
+
+#search-bar {
+    margin-top: 3vh;
+}
+
+.search-bar {
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+
+.credits {
+    text-align: center;
+    background: purple;
+    border-radius: 20px;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 1vh;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.img {
+    width: 70px;
+}

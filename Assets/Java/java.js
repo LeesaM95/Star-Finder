@@ -1,4 +1,4 @@
-// STEP ONE: DEFINE VARIABLES
+
 var searchBar = document.getElementById("search-bar");
 var featuredStar = document.getElementById("featured-star");
 var srchBtn = document.getElementById("search-button");
