@@ -2,7 +2,14 @@ header {
     margin-bottom: 5vh;
 }
 
-.search-bar {
+#star-logo {
+    color: #fff;
+    font-family: 'Audiowide', sans-serif;
+    font-size: 50px;
+    font-style: italic;
+}
+
+#search-bar {
     margin-top: 3vh;
 }
 
@@ -13,7 +20,7 @@ header {
 
 .credits {
     text-align: center;
-    background: powderblue;
+    background: purple;
     border-radius: 20px;
     padding-top: 1vh;
     padding-bottom: 1vh;

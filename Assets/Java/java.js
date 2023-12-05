@@ -1,6 +1,7 @@
 // STEP ONE: DEFINE VARIABLES
-var searchBar = document.getElementById("search-bar");
+var searchBar = document.getElementById("search-bar").innerText;
 var featuredStar = document.getElementById("featured-star");
+var searchButton = document.getElementById("search-button")
 
 // STEP TWO: SET UP SEARCH FUNCTIONS
 // TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
@@ -11,41 +12,51 @@ var featuredStar = document.getElementById("featured-star");
 
 
 
+searchButton.onclick = function() {
+
+  // // FOR FLICKR //
+  const yourApiKey = 'c4aaaedd99b8d8b5a0ee032443cea286';
+
+  const apiUrl = 'https://api.flickr.com/services/rest/';
+
+  const data = {
+    
+    method: 'flickr.photos.search',
+    api_key: yourApiKey,
+    text: searchBar + ' constellation',
+    sort: 'interestingness-desc',
+    per_page: 12,
+    license: '4',
+    extras: 'owner_name,license',
+    format: 'json',
+    nojsoncallback: 1,
+  };
+
+  const parameters = new URLSearchParams(data);
+
+  const url = `https://api.flickr.com/services/rest/?${parameters}`;
+  console.log(url);
 
 
 
+  fetch(url) 
+    .then(response => response.json())
+    .then(data => {    
+      const photos = data.photos.photo;
 
+      featuredStar.innerHTML = ''
 
-
-
-
-// // FOR FLICKR //
-const yourApiKey = 'c4aaaedd99b8d8b5a0ee032443cea286';
-const data = {
+      photos.forEach(photo => {
+        const img = document.createElement('img');
+        img.src = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
+        img.alt = photo.title;
+        featuredStar.appendChild(img);
+      })
+      console.log(data);
+      // We will impliment something later...
+    });
   
-  method: 'flickr.photos.search',
-  api_key: yourApiKey,
-  text: ' ', // Search Text
-  sort: 'interestingness-desc',
-  per_page: 12,
-  license: '4',
-  extras: 'owner_name,license',
-  format: 'json',
-  nojsoncallback: 1,
-};
-
-const parameters = new URLSearchParams(data);
-
-const url = `https://api.flickr.com/services/rest/?${parameters}`;
-console.log(url);
-
-
-fetch(url) 
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    // We will impliment something later...
-  });
+}
 
 //   const getFlickrImageURL = (photo, size) => {
 //     let url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${
@@ -92,6 +103,6 @@ fetch(url)
 // //     for (var i in data.query.pages) {
 // //         console.log(data.query.pages[i].title);
 // //     }
-
+// // }
 // // Send request to the server
 // xhr.send();
