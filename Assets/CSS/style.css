@@ -17,10 +17,54 @@ body {
     color: #fff;
 }
 
-
 #star-logo {
     color: #fff;
     font-family: 'Audiowide', sans-serif;
-    font-size: 50px;
+    font-size: 3rem;
     font-style: italic;
+    max-width:50%;
+    width:45%;
+    margin-left: 0px;
+    padding-left: 5px;
+}
+.search-bar{
+    width:40%;
+    max-width: 45%;
+    margin-right: 0px;
+   
+    padding-top: 2%;
+    display:flex;
+    gap:3%;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.search-input{
+    width:50%;
+    max-width: 55%;
+}
+
+.hero{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content:space-between;
+}
+.search-previous{
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    padding:1%;
+}
+
+footer{
+    position:fixed;
+    width:100%;
+    color:goldenrod;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+footer h4{
+    width: 30%;
+    max-width: 33%;
 }
