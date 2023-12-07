@@ -25,10 +25,6 @@ var wikiData = {
     action: "query",
     srsearch: " ",
     list: "search",
-    // namespace: 0,
-    // limit: 2,
-    // profile: "normal",
-    // redirects: "return",
     format: "json",
 };
 
@@ -100,12 +96,3 @@ srchBtn.addEventListener('click', function (event) {
 });
 // // FOR FLICKR //
 
-// var testUrl = "https://en.wikipedia.org/w/rest.php/v1/search/page?q=jupiter&limit=1"
-// fetch(testUrl)
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data) {
-//         console.log(data)
-//     })
-//     console.log(data);
