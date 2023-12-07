@@ -3,9 +3,6 @@ var searchBar = document.getElementById("search-bar");
 var featuredStar = document.getElementById("featured-star");
 var srchBtn = document.getElementById("btn");
 var inputVal = document.getElementById("submitInput");
-$wgCrossSiteAJAXdomains = [
-    '*'
-];
 
 var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
 var flickrData = {
@@ -24,26 +21,27 @@ var flickrData = {
 
 var apiKeyWiki = 'fd4bfdb503018e4083550a93176323b0'
 var wikiData = {
-    origin: 'https://en.wikipedia.org',
-    action: "opensearch",
-    search: " ",
-    namespace: 0,
-    limit: 2,
-    profile: "normal",
-    redirects: "return",
+    origin: "*",
+    action: "query",
+    srsearch: " ",
+    list: "search",
+    // namespace: 0,
+    // limit: 2,
+    // profile: "normal",
+    // redirects: "return",
     format: "json",
 };
 
 
-// 0.description, 0.excerpt, 0.id,
+// query.search.snippet,
 
 // STEP TWO: SET UP SEARCH FUNCTIONS
 // TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
 function wikiSearch() {
     // event.preventDefault();
-    wikiData.text = inputVal.value
+    wikiData.srsearch = inputVal.value
     var wikiParameters = new URLSearchParams(wikiData);
-    var wikiUrl = `https://en.wikipedia.org/w/rest.php${wikiParameters}`;
+    var wikiUrl = `https://en.wikipedia.org/w/api.php?${wikiParameters}`;
     
 
     fetch(wikiUrl)
@@ -52,18 +50,17 @@ function wikiSearch() {
         })
         .then(function (data) {
             console.log(data)
-            for (var i = 0; i < data.pages.length; i++) {
+            for (var i = 0; i < data.query.search.length; i++) {
                 // creating styling for photo to sit nicely within the code
-                console.log(data.pages[i].id);
-                var contentTg = document.createElement('<p>');
-                var wikiDesc = data.pages[i].description;
-                var id = data.pages[i].id;
-                var wikiExc = data.pages[i].excerpt;
-
-                contentTg.innerHTML = wikiExc;
+                
+                var contentTg = document.createElement('p');
+                var wikiDesc = data.query.search[i].snippet;
+                
+                contentTg.innerHTML = wikiDesc;
 
                 featuredStar.appendChild(contentTg);
             }
+ 
         })
 }
 
