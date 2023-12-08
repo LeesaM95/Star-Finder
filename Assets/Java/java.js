@@ -91,6 +91,7 @@ srchBtn.addEventListener('click', function (event) {
 });
 // // FOR FLICKR //
 
+
 // STEP THREE: STYLING
 
 // THREE A: DEFINING VARIABLES
@@ -107,4 +108,4 @@ srchBtn.addEventListener('click', function (event) {
 
 // if there are logged searches, when a user clicks on recent search
 
-// a pop up window should generate with a list of the most recent searches on their browser
+
