@@ -52,10 +52,16 @@ function wikiSearch() {
                 
                 contentTg.setAttribute("style", 
                 "float: right; font-family: monospace; font-size: 12.5px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
-                
-                contentTg.innerHTML = wikiDesc;
+                moreInfo.setAttribute("style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;")
+                wikiLink.setAttribute("href", wikiUrl + wikiPageId, "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;");
+
+
+                moreInfo.textContent = "If you'd like to learn more, please click the link " + wikiLink + "!";
+                contentTg.innerHTML = wikiDesc + " ...";
 
                 featuredStar.appendChild(contentTg);
+                featuredStar.appendChild(moreInfo);
+                featuredStar.appendChild(wikiLink);
             
  
         })
@@ -81,7 +87,7 @@ function flickrImgSearch() {
                 var imgTag = document.createElement('img');
                 
 
-                imgTag.setAttribute("style", "max-width: 538px; flex-direction: column; float:left; margin: 30px;",);
+                imgTag.setAttribute("style", "max-width: 538px; flex-direction: column; float:left; margin: 30px -30px 30px 30px;",);
 
                 var serverid = data.photos.photo[i].server;
                 var id = data.photos.photo[i].id;
