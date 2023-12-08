@@ -42,16 +42,21 @@ function wikiSearch() {
         })
         .then(function (data) {
             console.log(data)
-            for (var i = 0; i < data.query.search.length; i++) {
                 // creating styling for photo to sit nicely within the code
-                
                 var contentTg = document.createElement('p');
-                var wikiDesc = data.query.search[i].snippet;
+                var moreInfo = document.createElement('p');
+                var wikiLink = document.createElement('a');
+                
+                var wikiDesc = data.query.search[0].snippet;
+                var wikiPageId = data.query.search[0].pageid;
+                
+                contentTg.setAttribute("style", 
+                "float: right; font-family: monospace; font-size: 12.5px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
                 
                 contentTg.innerHTML = wikiDesc;
 
                 featuredStar.appendChild(contentTg);
-            }
+            
  
         })
 }
@@ -74,9 +79,9 @@ function flickrImgSearch() {
                 // creating styling for photo to sit nicely within the code
                 console.log(data.photos.photo[i].id);
                 var imgTag = document.createElement('img');
-                var imgDiv = document.createElement('div');
+                
 
-                imgDiv.setAttribute("class", "is-half is-justify-content-center m-3" , "style", "max-width: ")
+                imgTag.setAttribute("style", "max-width: 538px; flex-direction: column; float:left; margin: 30px;",);
 
                 var serverid = data.photos.photo[i].server;
                 var id = data.photos.photo[i].id;
@@ -85,7 +90,7 @@ function flickrImgSearch() {
                 imgTag.src = `https://live.staticflickr.com/${serverid}/${id}_${secret}.jpg`;
 
                 featuredStar.appendChild(imgTag);
-                featuredStar.appendChild(imgDiv);
+                
             }
         });
 }
