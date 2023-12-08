@@ -25,20 +25,12 @@ var wikiData = {
     action: "query",
     srsearch: " ",
     list: "search",
-    // namespace: 0,
-    // limit: 2,
-    // profile: "normal",
-    // redirects: "return",
     format: "json",
 };
-
-
-// query.search.snippet,
 
 // STEP TWO: SET UP SEARCH FUNCTIONS
 // TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
 function wikiSearch() {
-    // event.preventDefault();
     wikiData.srsearch = inputVal.value
     var wikiParameters = new URLSearchParams(wikiData);
     var wikiUrl = `https://en.wikipedia.org/w/api.php?${wikiParameters}`;
@@ -66,7 +58,6 @@ function wikiSearch() {
 
 // TWO B: DEFINE SEARCH FUNCTION FOR FLICKR
 function flickrImgSearch() {
-    // event.preventDefault();
     flickrData.text = inputVal.value
     var flickrParameters = new URLSearchParams(flickrData);
     var flickrUrl = `https://api.flickr.com/services/rest/?${flickrParameters}`;
@@ -100,12 +91,20 @@ srchBtn.addEventListener('click', function (event) {
 });
 // // FOR FLICKR //
 
-// var testUrl = "https://en.wikipedia.org/w/rest.php/v1/search/page?q=jupiter&limit=1"
-// fetch(testUrl)
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data) {
-//         console.log(data)
-//     })
-//     console.log(data);
+// STEP THREE: STYLING
+
+// THREE A: DEFINING VARIABLES
+
+// THREE B: STYLES FOR WIKI INFO
+
+// THREE C: STYLES FOR FLICKR IMGS
+
+// STEP FOUR: LOCAL STORAGE 
+ 
+// set up local storage for stored  searches 
+
+// if there are no recent searches, have a pop up window display as such when recent search is clicked 
+
+// if there are logged searches, when a user clicks on recent search
+
+// a pop up window should generate with a list of the most recent searches on their browser
