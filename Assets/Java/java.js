@@ -1,108 +1,111 @@
-// STEP ONE: DEFINE VARIABLES
-var searchBar = document.getElementById("search-bar").innerText;
+
+var searchBar = document.getElementById("search-bar");
 var featuredStar = document.getElementById("featured-star");
-var searchButton = document.getElementById("search-button")
+var srchBtn = document.getElementById("btn");
+var inputVal = document.getElementById("submitInput");
 
-// STEP TWO: SET UP SEARCH FUNCTIONS
-// TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
-// TWO B: DEFINE SEARCH FUNCTION FOR FLICKR
-
-// STEP THREE: 
-
-
-
-
-searchButton.onclick = function() {
-
-  // // FOR FLICKR //
-  const yourApiKey = 'c4aaaedd99b8d8b5a0ee032443cea286';
-
-  const apiUrl = 'https://api.flickr.com/services/rest/';
-
-  const data = {
-    
+var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
+var flickrData = {
     method: 'flickr.photos.search',
-    api_key: yourApiKey,
-    text: searchBar + ' constellation',
-    sort: 'interestingness-desc',
-    per_page: 12,
-    license: '4',
+    api_key: apiKeyFlickr,
+    text: " ", // Search Text
+    content_types: 0,
+    privacy_filter: 1,
+    geo_context: 2,
+    per_page: 3,
     extras: 'owner_name,license',
     format: 'json',
     nojsoncallback: 1,
-  };
-
-  const parameters = new URLSearchParams(data);
-
-  const url = `https://api.flickr.com/services/rest/?${parameters}`;
-  console.log(url);
+};
 
 
+var apiKeyWiki = 'fd4bfdb503018e4083550a93176323b0'
+var wikiData = {
+    origin: "*",
+    action: "query",
+    srsearch: " ",
+    list: "search",
+    // namespace: 0,
+    // limit: 2,
+    // profile: "normal",
+    // redirects: "return",
+    format: "json",
+};
 
-  fetch(url) 
-    .then(response => response.json())
-    .then(data => {    
-      const photos = data.photos.photo;
 
-      featuredStar.innerHTML = ''
+// query.search.snippet,
 
-      photos.forEach(photo => {
-        const img = document.createElement('img');
-        img.src = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
-        img.alt = photo.title;
-        featuredStar.appendChild(img);
-      })
-      console.log(data);
-      // We will impliment something later...
-    });
-  
+// STEP TWO: SET UP SEARCH FUNCTIONS
+// TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
+function wikiSearch() {
+    // event.preventDefault();
+    wikiData.srsearch = inputVal.value
+    var wikiParameters = new URLSearchParams(wikiData);
+    var wikiUrl = `https://en.wikipedia.org/w/api.php?${wikiParameters}`;
+    
+
+    fetch(wikiUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+            for (var i = 0; i < data.query.search.length; i++) {
+                // creating styling for photo to sit nicely within the code
+                
+                var contentTg = document.createElement('p');
+                var wikiDesc = data.query.search[i].snippet;
+                
+                contentTg.innerHTML = wikiDesc;
+
+                featuredStar.appendChild(contentTg);
+            }
+ 
+        })
 }
 
-//   const getFlickrImageURL = (photo, size) => {
-//     let url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${
-//       photo.secret
-//     }`;
-//     if (size) {
-//       // Configure image size
-//       url += `_${size}`;
-//     }
-//     url += '.jpg';
-//     return url;
-//   };
-  
-//   axios.get(url)
-//     .then(response => response.json())
-//     .then(data => (
-//       // get an array of image-url
-//       data.photos.photo.map((photo) => {
-//         return getFlickrImageURL(photo, 'q');
-//       })
-//     ));
+// TWO B: DEFINE SEARCH FUNCTION FOR FLICKR
+function flickrImgSearch() {
+    // event.preventDefault();
+    flickrData.text = inputVal.value
+    var flickrParameters = new URLSearchParams(flickrData);
+    var flickrUrl = `https://api.flickr.com/services/rest/?${flickrParameters}`;
+    fetch(flickrUrl)
+        .then(function (response) {
+            return response.json();
+        })
 
+        .then(function (data) {
+            
+            // We want users to be able to input a SEARCH TERM for a star/constellation
+            for (var i = 0; i < data.photos.photo.length; i++) {
+                // creating styling for photo to sit nicely within the code
+                console.log(data.photos.photo[i].id);
+                var imgTag = document.createElement('img');
+                var serverid = data.photos.photo[i].server;
+                var id = data.photos.photo[i].id;
+                var secret = data.photos.photo[i].secret;
+
+                imgTag.src = `https://live.staticflickr.com/${serverid}/${id}_${secret}.jpg`;
+
+                featuredStar.appendChild(imgTag);
+            }
+        });
+}
+
+srchBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    flickrImgSearch();
+    wikiSearch();
+});
 // // FOR FLICKR //
 
-// // FOR WIKIPEDIA //
-// var xhr = new XMLHttpRequest();
-
-// // Open a new connection, using the GET request on the URL endpoint
-// // Providing 3 arguments (GET/POST, The URL, Async True/False)
-// xhr.open('GET', url, true);
-// // Once request has loaded...
-// xhr.onload = function() {
-//     // Parse the request into JSON
-//     var wikiData = JSON.parse(this.response);
-
-//     // Log the data object
-//     console.log(wikiData);
-
-// //     // Log the page objects
-// //     console.log(data.query.pages)
-
-// //     // Loop through the data object
-// //     // Pulling out the titles of each page
-// //     for (var i in data.query.pages) {
-// //         console.log(data.query.pages[i].title);
-// //     }
-// // }
-// // Send request to the server
-// xhr.send();
+// var testUrl = "https://en.wikipedia.org/w/rest.php/v1/search/page?q=jupiter&limit=1"
+// fetch(testUrl)
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (data) {
+//         console.log(data)
+//     })
+//     console.log(data);
