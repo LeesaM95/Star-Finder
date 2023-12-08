@@ -12,7 +12,7 @@ var flickrData = {
     content_types: 0,
     privacy_filter: 1,
     geo_context: 2,
-    per_page: 3,
+    per_page: 1,
     extras: 'owner_name,license',
     format: 'json',
     nojsoncallback: 1,
@@ -55,6 +55,7 @@ function wikiSearch() {
  
         })
 }
+// FOR WIKI END //
 
 // TWO B: DEFINE SEARCH FUNCTION FOR FLICKR
 function flickrImgSearch() {
@@ -73,6 +74,10 @@ function flickrImgSearch() {
                 // creating styling for photo to sit nicely within the code
                 console.log(data.photos.photo[i].id);
                 var imgTag = document.createElement('img');
+                var imgDiv = document.createElement('div');
+
+                imgDiv.setAttribute("class", "is-half is-justify-content-center m-3" , "style", "max-width: ")
+
                 var serverid = data.photos.photo[i].server;
                 var id = data.photos.photo[i].id;
                 var secret = data.photos.photo[i].secret;
@@ -80,6 +85,7 @@ function flickrImgSearch() {
                 imgTag.src = `https://live.staticflickr.com/${serverid}/${id}_${secret}.jpg`;
 
                 featuredStar.appendChild(imgTag);
+                featuredStar.appendChild(imgDiv);
             }
         });
 }
@@ -89,18 +95,10 @@ srchBtn.addEventListener('click', function (event) {
     flickrImgSearch();
     wikiSearch();
 });
-// // FOR FLICKR //
+// // FOR FLICKR END //
 
 
-// STEP THREE: STYLING
-
-// THREE A: DEFINING VARIABLES
-
-// THREE B: STYLES FOR WIKI INFO
-
-// THREE C: STYLES FOR FLICKR IMGS
-
-// STEP FOUR: LOCAL STORAGE 
+// STEP THREE: LOCAL STORAGE 
  
 // set up local storage for stored  searches 
 
