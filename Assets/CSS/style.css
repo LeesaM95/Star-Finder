@@ -10,7 +10,25 @@ header {
 
 body {
     background-color: var(--bg-color);
+    background-image: url("../constellation\ image.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+.title {
+    color: white;
+}
+
+#title-text {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.subtitle {
+    color: white;
+}
+
 
 #btn {
     background-color: var(--button);
@@ -31,7 +49,6 @@ body {
     width:40%;
     max-width: 45%;
     margin-right: 0px;
-   
     padding-top: 2%;
     display:flex;
     gap:3%;
@@ -56,15 +73,14 @@ body {
 }
 
 footer{
-    position:fixed;
     width:100%;
-    color:goldenrod;
     display: flex;
     justify-content: space-evenly;
     text-align: center;
+    background-color: unset;
 }
 
-footer h4{
-    width: 30%;
-    max-width: 33%;
+footer div {
+    display: flex;
+    color: white;
 }

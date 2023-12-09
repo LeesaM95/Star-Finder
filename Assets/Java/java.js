@@ -12,7 +12,7 @@ var flickrData = {
     content_types: 0,
     privacy_filter: 1,
     geo_context: 2,
-    per_page: 3,
+    per_page: 1,
     extras: 'owner_name,license',
     format: 'json',
     nojsoncallback: 1,
@@ -25,20 +25,12 @@ var wikiData = {
     action: "query",
     srsearch: " ",
     list: "search",
-    // namespace: 0,
-    // limit: 2,
-    // profile: "normal",
-    // redirects: "return",
     format: "json",
 };
-
-
-// query.search.snippet,
 
 // STEP TWO: SET UP SEARCH FUNCTIONS
 // TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
 function wikiSearch() {
-    // event.preventDefault();
     wikiData.srsearch = inputVal.value
     var wikiParameters = new URLSearchParams(wikiData);
     var wikiUrl = `https://en.wikipedia.org/w/api.php?${wikiParameters}`;
@@ -50,10 +42,12 @@ function wikiSearch() {
         })
         .then(function (data) {
             console.log(data)
+            featuredStar.innerHTML = "";
             for (var i = 0; i < data.query.search.length; i++) {
                 // creating styling for photo to sit nicely within the code
                 
                 var contentTg = document.createElement('p');
+                contentTg.style ="color:white"
                 var wikiDesc = data.query.search[i].snippet;
                 
                 contentTg.innerHTML = wikiDesc;
@@ -63,10 +57,10 @@ function wikiSearch() {
  
         })
 }
+// FOR WIKI END //
 
 // TWO B: DEFINE SEARCH FUNCTION FOR FLICKR
 function flickrImgSearch() {
-    // event.preventDefault();
     flickrData.text = inputVal.value
     var flickrParameters = new URLSearchParams(flickrData);
     var flickrUrl = `https://api.flickr.com/services/rest/?${flickrParameters}`;
@@ -82,6 +76,10 @@ function flickrImgSearch() {
                 // creating styling for photo to sit nicely within the code
                 console.log(data.photos.photo[i].id);
                 var imgTag = document.createElement('img');
+                var imgDiv = document.createElement('div');
+
+                imgDiv.setAttribute("class", "is-half is-justify-content-center m-3" , "style", "max-width: ")
+
                 var serverid = data.photos.photo[i].server;
                 var id = data.photos.photo[i].id;
                 var secret = data.photos.photo[i].secret;
@@ -89,6 +87,7 @@ function flickrImgSearch() {
                 imgTag.src = `https://live.staticflickr.com/${serverid}/${id}_${secret}.jpg`;
 
                 featuredStar.appendChild(imgTag);
+                featuredStar.appendChild(imgDiv);
             }
         });
 }
@@ -98,14 +97,13 @@ srchBtn.addEventListener('click', function (event) {
     flickrImgSearch();
     wikiSearch();
 });
-// // FOR FLICKR //
+// // FOR FLICKR END //
 
-// var testUrl = "https://en.wikipedia.org/w/rest.php/v1/search/page?q=jupiter&limit=1"
-// fetch(testUrl)
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data) {
-//         console.log(data)
-//     })
-//     console.log(data);
+
+// STEP THREE: LOCAL STORAGE 
+ 
+// set up local storage for stored  searches 
+
+// if there are no recent searches, have a pop up window display as such when recent search is clicked 
+
+// if there are logged searches, when a user clicks on recent search
