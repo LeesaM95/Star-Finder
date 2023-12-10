@@ -1,6 +1,10 @@
-
 var searchBar = document.getElementById("search-bar");
 var featuredStar = document.getElementById("featured-star");
+var srchBtn = document.getElementById("btn");
+var inputVal = document.getElementById("submitInput");
+
+var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
+var flickrData = {
 var srchBtn = document.getElementById("btn");
 var inputVal = document.getElementById("submitInput");
 
@@ -12,6 +16,7 @@ var flickrData = {
     content_types: 0,
     privacy_filter: 1,
     geo_context: 2,
+    per_page: 1,
     per_page: 1,
     extras: 'owner_name,license',
     format: 'json',

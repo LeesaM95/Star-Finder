@@ -44,8 +44,9 @@ body {
     width:45%;
     margin-left: 0px;
     padding-left: 5px;
+    padding-top: 10px;
 }
-.search-bar{
+.search-bar {
     width:40%;
     max-width: 45%;
     margin-right: 0px;
@@ -55,24 +56,25 @@ body {
     flex-direction: row;
     justify-content: flex-end;
 }
-.search-input{
+.search-input {
     width:50%;
     max-width: 55%;
 }
 
-.hero{
+.hero {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content:space-between;
 }
-.search-previous{
+.search-previous {
     font-size: 1rem;
     letter-spacing: 1.5px;
     padding:1%;
 }
 
-footer{
+footer {
+    position:fixed;
     width:100%;
     display: flex;
     justify-content: space-evenly;
@@ -80,7 +82,7 @@ footer{
     background-color: unset;
 }
 
-footer div {
-    display: flex;
-    color: white;
+footer h4 {
+    width: 30%;
+    max-width: 33%;
 }
