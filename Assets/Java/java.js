@@ -46,14 +46,18 @@ function wikiSearch() {
                 var contentTg = document.createElement('p');
                 var moreInfo = document.createElement('p');
                 var wikiLink = document.createElement('a');
-                
+
+                var wikUrl = "=https://en.wikipedia.org/w/"
                 var wikiDesc = data.query.search[0].snippet;
-                var wikiPageId = data.query.search[0].pageid;
+                var wikiPageTitle = data.query.search[0].title;
+                var wikiPageString = JSON.stringify(wikiPageTitle)
                 
                 contentTg.setAttribute("style", 
                 "float: right; font-family: monospace; font-size: 12.5px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
                 moreInfo.setAttribute("style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;")
-                wikiLink.setAttribute("href", wikiUrl + wikiPageId, "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;");
+                wikiLink.setAttribute("href" + wikUrl + wikiPageString, 
+                "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;",
+                "alt",  "here", );
 
 
                 moreInfo.textContent = "If you'd like to learn more, please click the link " + wikiLink + "!";
