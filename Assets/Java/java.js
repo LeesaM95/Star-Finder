@@ -3,6 +3,22 @@ var featuredStar = document.getElementById("featured-star");
 var srchBtn = document.getElementById("btn");
 var inputVal = document.getElementById("submitInput");
 
+function saveToLocalStorage() {
+  const searchTerm = inputVal.value;
+  localStorage.setItem('searchTerm', searchTerm);
+  console.log(searchTerm)
+}
+
+function getFromLocalStorage() {
+  return localStorage.getItem('searchTerm') || '';
+  console.log(searchTerm)
+}
+
+getFromLocalStorage()
+
+document.getElementById('search-previous').value = getFromLocalStorage();
+
+
 var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
 var flickrData = {
     method: 'flickr.photos.search',
@@ -41,16 +57,27 @@ function wikiSearch() {
         })
         .then(function (data) {
             console.log(data)
-            for (var i = 0; i < data.query.search.length; i++) {
                 // creating styling for photo to sit nicely within the code
-                
                 var contentTg = document.createElement('p');
-                var wikiDesc = data.query.search[i].snippet;
+                var moreInfo = document.createElement('p');
+                var wikiLink = document.createElement('a');
                 
-                contentTg.innerHTML = wikiDesc;
+                var wikiDesc = data.query.search[0].snippet;
+                var wikiPageId = data.query.search[0].pageid;
+                
+                contentTg.setAttribute("style", 
+                "float: right; font-family: monospace; font-size: 12.5px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
+                moreInfo.setAttribute("style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;")
+                wikiLink.setAttribute("href", wikiUrl + wikiPageId, "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;");
+
+
+                moreInfo.textContent = "If you'd like to learn more, please click the link " + wikiLink + "!";
+                contentTg.innerHTML = wikiDesc + " ...";
 
                 featuredStar.appendChild(contentTg);
-            }
+                featuredStar.appendChild(moreInfo);
+                featuredStar.appendChild(wikiLink);
+            
  
         })
 }
@@ -73,9 +100,9 @@ function flickrImgSearch() {
                 // creating styling for photo to sit nicely within the code
                 console.log(data.photos.photo[i].id);
                 var imgTag = document.createElement('img');
-                var imgDiv = document.createElement('div');
+                
 
-                imgDiv.setAttribute("class", "is-half is-justify-content-center m-3" , "style", "max-width: ")
+                imgTag.setAttribute("style", "max-width: 538px; flex-direction: column; float:left; margin: 30px -30px 30px 30px;",);
 
                 var serverid = data.photos.photo[i].server;
                 var id = data.photos.photo[i].id;
@@ -84,7 +111,7 @@ function flickrImgSearch() {
                 imgTag.src = `https://live.staticflickr.com/${serverid}/${id}_${secret}.jpg`;
 
                 featuredStar.appendChild(imgTag);
-                featuredStar.appendChild(imgDiv);
+                
             }
         });
 }
@@ -93,6 +120,7 @@ srchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     flickrImgSearch();
     wikiSearch();
+    saveToLocalStorage();
 });
 // // FOR FLICKR END //
 
@@ -101,4 +129,6 @@ srchBtn.addEventListener('click', function (event) {
  
 // set up local storage for stored  searches 
 
-// if there are no recent searches, have a pop up w
+// if there are no recent searches, have a pop up window display as such when recent search is clicked 
+
+// if there are logged searches, when a user clicks on recent search

@@ -34,19 +34,15 @@
 
   <!-- Hero content: will be in the middle -->
   <section class="hero is-fullheight columns is-flex">
-    <div class="hero-body container">
-      <div id="title-text">
+    <div class="hero-body">
+      <div class="container has-text-centered" id="featured-star">
         <p class="title">
           Welcome to Star Finder
         </p>
         <p class="subtitle">
-          Where the Stars are at your fingertips. Think of a star and click Search!
-  
+          Allow Users to put in the name of a constellation, info and an image of the constellation to pop up
+
         </p>
-      </div>
-      
-      <div class="container has-text-centered" id="featured-star">
-        
       </div>
     </div>
   </section>
@@ -56,7 +52,7 @@
         <div class="columns">
 
           <div class="column">
-           
+            <img src="./Assets/constellation image.jpg" />
           </div>
           <div class="column"></div>
         </div>
@@ -66,10 +62,14 @@
 
   </main>
   <!-- Hero footer: will stick at the bottom -->
-  <footer>
-    <div class="has-text-centered">
-      <h4>Coded By: Omri, Leesa, Garrett</h4>
-    
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <h3>Coded By:</h3>
+      <h4>
+        <span>Omri</span>
+        <span>Leesa</span>
+        <span>Garrett</span>
+      </h4>
     </div>
 
   </footer>
@@ -78,4 +78,8 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./Assets/Java/java.js"></script>
 </body>
+
 </html>
+
+
+
