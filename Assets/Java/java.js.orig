@@ -18,6 +18,12 @@ getFromLocalStorage()
 
 document.getElementById('search-previous').value = getFromLocalStorage();
 
+
+var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
+var flickrData = {
+var srchBtn = document.getElementById("btn");
+var inputVal = document.getElementById("submitInput");
+
 var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
 var flickrData = {
     method: 'flickr.photos.search',
@@ -32,7 +38,9 @@ var flickrData = {
     nojsoncallback: 1,
 };
 
+  const parameters = new URLSearchParams(data);
 
+<<<<<<< HEAD
 var apiKeyWiki = 'fd4bfdb503018e4083550a93176323b0'
 var wikiData = {
     origin: "*",
@@ -60,18 +68,14 @@ function wikiSearch() {
                 var contentTg = document.createElement('p');
                 var moreInfo = document.createElement('p');
                 var wikiLink = document.createElement('a');
-
-                var wikUrl = "=https://en.wikipedia.org/w/"
+                
                 var wikiDesc = data.query.search[0].snippet;
-                var wikiPageTitle = data.query.search[0].title;
-                var wikiPageString = JSON.stringify(wikiPageTitle)
+                var wikiPageId = data.query.search[0].pageid;
                 
                 contentTg.setAttribute("style", 
                 "float: right; font-family: monospace; font-size: 12.5px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
                 moreInfo.setAttribute("style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;")
-                wikiLink.setAttribute("href" + wikUrl + wikiPageString, 
-                "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;",
-                "alt",  "here", );
+                wikiLink.setAttribute("href", wikiUrl + wikiPageId, "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;");
 
 
                 moreInfo.textContent = "If you'd like to learn more, please click the link " + wikiLink + "!";
@@ -126,17 +130,83 @@ srchBtn.addEventListener('click', function (event) {
     saveToLocalStorage();
 });
 // // FOR FLICKR END //
+=======
+  const url = `https://api.flickr.com/services/rest/?${parameters}`;
+  console.log(url);
+>>>>>>> 83a40fd1ab96c63e66914dcdf8b6d901600e5f55
 
 
-// STEP THREE: LOCAL STORAGE 
- 
-// set up local storage for stored  searches 
 
+<<<<<<< HEAD
 // if there are no recent searches, have a pop up window display as such when recent search is clicked 
 
 // if there are logged searches, when a user clicks on recent search
+=======
+  fetch(url) 
+    .then(response => response.json())
+    .then(data => {    
+      const photos = data.photos.photo;
+
+      featuredStar.innerHTML = ''
+
+      photos.forEach(photo => {
+        const img = document.createElement('img');
+        img.src = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
+        img.alt = photo.title;
+        featuredStar.appendChild(img);
+      })
+      console.log(data);
+      // We will impliment something later...
+    });
+  
 
 
+//   const getFlickrImageURL = (photo, size) => {
+//     let url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${
+//       photo.secret
+//     }`;
+//     if (size) {
+//       // Configure image size
+//       url += `_${size}`;
+//     }
+//     url += '.jpg';
+//     return url;
+//   };
+  
+//   axios.get(url)
+//     .then(response => response.json())
+//     .then(data => (
+//       // get an array of image-url
+//       data.photos.photo.map((photo) => {
+//         return getFlickrImageURL(photo, 'q');
+//       })
+//     ));
 
+// // FOR FLICKR //
 
+// // FOR WIKIPEDIA //
+// var xhr = new XMLHttpRequest();
 
+// // Open a new connection, using the GET request on the URL endpoint
+// // Providing 3 arguments (GET/POST, The URL, Async True/False)
+// xhr.open('GET', url, true);
+// // Once request has loaded...
+// xhr.onload = function() {
+//     // Parse the request into JSON
+//     var wikiData = JSON.parse(this.response);
+
+//     // Log the data object
+//     console.log(wikiData);
+
+// //     // Log the page objects
+// //     console.log(data.query.pages)
+
+// //     // Loop through the data object
+// //     // Pulling out the titles of each page
+// //     for (var i in data.query.pages) {
+// //         console.log(data.query.pages[i].title);
+// //     }
+// // }
+// // Send request to the server
+// xhr.send();
+>>>>>>> 83a40fd1ab96c63e66914dcdf8b6d901600e5f55

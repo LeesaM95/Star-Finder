@@ -3,21 +3,6 @@ var featuredStar = document.getElementById("featured-star");
 var srchBtn = document.getElementById("btn");
 var inputVal = document.getElementById("submitInput");
 
-function saveToLocalStorage() {
-  const searchTerm = inputVal.value;
-  localStorage.setItem('searchTerm', searchTerm);
-  console.log(searchTerm)
-}
-
-function getFromLocalStorage() {
-  return localStorage.getItem('searchTerm') || '';
-  console.log(searchTerm)
-}
-
-getFromLocalStorage()
-
-document.getElementById('search-previous').value = getFromLocalStorage();
-
 var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
 var flickrData = {
     method: 'flickr.photos.search',
@@ -123,7 +108,6 @@ srchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     flickrImgSearch();
     wikiSearch();
-    saveToLocalStorage();
 });
 // // FOR FLICKR END //
 
@@ -135,8 +119,3 @@ srchBtn.addEventListener('click', function (event) {
 // if there are no recent searches, have a pop up window display as such when recent search is clicked 
 
 // if there are logged searches, when a user clicks on recent search
-
-
-
-
-
