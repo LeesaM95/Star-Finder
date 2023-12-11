@@ -43,29 +43,36 @@ function wikiSearch() {
         .then(function (data) {
             console.log(data)
                 // creating styling for photo to sit nicely within the code
-                var contentTg = document.createElement('p');
-                var moreInfo = document.createElement('p');
-                var wikiLink = document.createElement('a');
+                var contentTg = document.createElement('p'); //snippet from wikipedia
+                var moreInfo = document.createElement('p'); // for more information 
+                var wikiLink = document.createElement('a'); // link to the page on wiki
 
-                var wikUrl = "=https://en.wikipedia.org/w/"
+                var wikiUrl = "href=https://en.wikipedia.org/w/"
                 var wikiDesc = data.query.search[0].snippet;
                 var wikiPageTitle = data.query.search[0].title;
-                var wikiPageString = JSON.stringify(wikiPageTitle)
-                
+                var wikiPageString = JSON.stringify(wikiPageTitle) // "Milky(+)Way"
+                var stringElement = "+"
+                var wikiStringSplit = wikiPageString.split(stringElement);
+                var fullwikiUrl = wikiUrl.concat(wikiStringSplit);
+
+                //Trying to create wikiPageTitle into a string, then add stringElement to the string created, and finally concat wikiStringSplit (when it's properly rendered) 
+                // to fullwikiUrl to make a full url that will be added to the wikiLink
+
+             
                 contentTg.setAttribute("style", 
-                "float: right; font-family: monospace; font-size: 12.5px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
+                "float: right; font-family: monospace; font-size: 28px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
                 moreInfo.setAttribute("style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;")
-                wikiLink.setAttribute("href" + wikUrl + wikiPageString, 
-                "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;",
+                wikiLink.setAttribute( 
+                "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: -30px 30px 30px -50%; max-width: 538px;",
                 "alt",  "here", );
 
 
-                moreInfo.textContent = "If you'd like to learn more, please click the link " + wikiLink + "!";
+                moreInfo.textContent = "If you'd like to learn more, please click the link " + fullwikiUrl + "!";
                 contentTg.innerHTML = wikiDesc + " ...";
 
                 featuredStar.appendChild(contentTg);
                 featuredStar.appendChild(moreInfo);
-                featuredStar.appendChild(wikiLink);
+                featuredStar.appendChild(wikiLink, fullwikiUrl);
             
  
         })
@@ -121,4 +128,9 @@ srchBtn.addEventListener('click', function (event) {
 
 // if there are logged searches, when a user clicks on recent search
 
+
+// STEP FOUR:
+// WHEN the user searches for a constellation
+// THEN the image and snippet from wikipedia will load on the page
+// WHEN the title and subtitle of the main page "Star Finder: Where the stars are at your fingertips", is replaced with the results during the search. 
 
