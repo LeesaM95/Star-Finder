@@ -3,46 +3,35 @@ var featuredStar = document.getElementById("featured-star");
 var srchBtn = document.getElementById("btn");
 var inputVal = document.getElementById("submitInput");
 
-$(document).ready(function(){
-  // Load saved items from local storage to the dropdown
-  loadSavedItems();
+function saveToLocalStorage() {
+  const searchTerm = inputVal.value;
+  localStorage.setItem('searchTerm', searchTerm);
+  console.log(searchTerm)
+}
 
-  // Save item to local storage when the button is clicked
-  $("#btn").click(function(){
-      var newItem = inputVal.value;
-      if (newItem) {
-          saveItem(newItem);
-          loadSavedItems();
-      }
-  });
+function getFromLocalStorage() {
+  return localStorage.getItem('searchTerm') || '';
+  console.log(searchTerm)
+}
 
-  function saveItem(item) {
-      // Get existing items from local storage or create an empty array
-      var savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+getFromLocalStorage()
 
-      // Add the new item to the array
-      savedItems.push(item);
+document.getElementById('search-previous').value = getFromLocalStorage();
 
-      // Save the updated array back to local storage
-      localStorage.setItem('savedItems', JSON.stringify(savedItems));
-  }
+//need jquery ui 
+// create functions and stylings for jquery ui 
 
-  function loadSavedItems() {
-      // Clear existing options in the dropdown
-      $("#savedItems").empty();
+const dropdownSelector = document.getElementById("search-previous")
+const dropdownMenu = document.querySelector("dropdown-content")
 
-      // Get saved items from local storage
-      var savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+const toggleDropdown = function () {
+  dropdownMenu.classList.toggle("show")
+}
 
-      var dropdown = document.getElementById('search-previous')
-
-      // Populate the dropdown with saved items
-      for (var i = savedItems.length - 5; i < savedItems.length; i++) {
-          $("#search-previous").append('<option value="' + savedItems[i] + '">' + savedItems[i] + '</option>');
-      }
-  }
-});
-
+dropdownSelector.addEventListener("click", function (e) {
+  e.stopPropagation();
+  toggleDropdown();
+})
 
 var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
 var flickrData = {
@@ -52,7 +41,6 @@ var flickrData = {
     content_types: 0,
     privacy_filter: 1,
     geo_context: 2,
-    per_page: 1,
     per_page: 1,
     extras: 'owner_name,license',
     format: 'json',
@@ -83,52 +71,33 @@ function wikiSearch() {
         })
         .then(function (data) {
             console.log(data)
-
                 // creating styling for photo to sit nicely within the code
-                var contentTg = document.createElement('p'); //snippet from wikipedia
-                var moreInfo = document.createElement('p'); // for more information 
-                var wikiLink = document.createElement('a'); // link to the page on wiki
+                var contentTg = document.createElement('p');
+                var moreInfo = document.createElement('p');
+                var wikiLink = document.createElement('a');
 
-                var wikiUrl = "href=https://en.wikipedia.org/w/"
+                var wikUrl = "=https://en.wikipedia.org/w/"
                 var wikiDesc = data.query.search[0].snippet;
                 var wikiPageTitle = data.query.search[0].title;
-                var wikiPageString = JSON.stringify(wikiPageTitle) // "Milky(+)Way"
-                var stringElement = "+"
-                var wikiStringSplit = wikiPageString.split(stringElement);
-                var fullwikiUrl = wikiUrl.concat(wikiStringSplit);
-
-                //Trying to create wikiPageTitle into a string, then add stringElement to the string created, and finally concat wikiStringSplit (when it's properly rendered) 
-                // to fullwikiUrl to make a full url that will be added to the wikiLink
-
-             
+                var wikiPageString = JSON.stringify(wikiPageTitle)
+                
                 contentTg.setAttribute("style", 
-                "float: right; font-family: monospace; font-size: 28px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
+                "float: right; font-family: monospace; font-size: 12.5px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
                 moreInfo.setAttribute("style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;")
-                wikiLink.setAttribute( 
-                "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: -30px 30px 30px -50%; max-width: 538px;",
+                wikiLink.setAttribute("href" + wikUrl + wikiPageString, 
+                "style", "float: right; font-family: monospace; font-size: 14px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px;",
                 "alt",  "here", );
 
 
-                moreInfo.textContent = "If you'd like to learn more, please click the link " + fullwikiUrl + "!";
+                moreInfo.textContent = "If you'd like to learn more, please click the link " + wikiLink + "!";
                 contentTg.innerHTML = wikiDesc + " ...";
-      
-            featuredStar.innerHTML = "";
-            for (var i = 0; i < data.query.search.length; i++) {
-                // creating styling for photo to sit nicely within the code
-                
-                var contentTg = document.createElement('p');
-                contentTg.style ="color:white"
-                var wikiDesc = data.query.search[i].snippet;
-                
-                contentTg.innerHTML = wikiDesc;
-
 
                 featuredStar.appendChild(contentTg);
                 featuredStar.appendChild(moreInfo);
-                featuredStar.appendChild(wikiLink, fullwikiUrl);
-            }
-      
-})
+                featuredStar.appendChild(wikiLink);
+            
+ 
+        })
 }
 // FOR WIKI END //
 
@@ -169,7 +138,8 @@ srchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     flickrImgSearch();
     wikiSearch();
-})
+    saveToLocalStorage();
+});
 // // FOR FLICKR END //
 
 
@@ -178,10 +148,10 @@ srchBtn.addEventListener('click', function (event) {
 // set up local storage for stored  searches 
 
 // if there are no recent searches, have a pop up window display as such when recent search is clicked 
+
 // if there are logged searches, when a user clicks on recent search
 
 
-// STEP FOUR:
-// WHEN the user searches for a constellation
-// THEN the image and snippet from wikipedia will load on the page
-// WHEN the title and subtitle of the main page "Star Finder: Where the stars are at your fingertips", is replaced with the results during the search. 
+
+
+
