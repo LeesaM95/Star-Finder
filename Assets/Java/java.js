@@ -5,11 +5,6 @@ var inputVal = document.getElementById("submitInput");
 
 var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
 var flickrData = {
-var srchBtn = document.getElementById("btn");
-var inputVal = document.getElementById("submitInput");
-
-var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
-var flickrData = {
     method: 'flickr.photos.search',
     api_key: apiKeyFlickr,
     text: " ", // Search Text
