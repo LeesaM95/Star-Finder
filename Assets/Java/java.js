@@ -41,7 +41,7 @@ function wikiSearch() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
+            
 
                 // creating styling for photo to sit nicely within the code
                 var contentTg = document.createElement('p'); //snippet from wikipedia
@@ -66,10 +66,10 @@ function wikiSearch() {
 
                 featuredStar.appendChild(contentTg);
                
-            
+            }  
  
         })
-}
+
 // FOR WIKI END //
 
 // TWO B: DEFINE SEARCH FUNCTION FOR FLICKR
