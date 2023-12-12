@@ -33,6 +33,36 @@ var flickrData = {
     // TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
     function wikiSearch() {
         wikiData.srsearch = inputVal.value
+
+var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
+var flickrData = {
+    method: 'flickr.photos.search',
+    api_key: apiKeyFlickr,
+    text: " ", // Search Text
+    content_types: 0,
+    privacy_filter: 1,
+    geo_context: 2,
+    per_page: 1,
+    per_page: 1,
+    extras: 'owner_name,license',
+    format: 'json',
+    nojsoncallback: 1,
+};
+
+
+var apiKeyWiki = 'fd4bfdb503018e4083550a93176323b0'
+var wikiData = {
+    origin: "*",
+    action: "query",
+    srsearch: " ",
+    list: "search",
+    format: "json",
+};
+
+// STEP TWO: SET UP SEARCH FUNCTIONS
+// TWO A: DEFINE SEARCH FUNCTION FOR WIKIPEDIA
+function wikiSearch() {
+    wikiData.srsearch = inputVal.value
     var wikiParameters = new URLSearchParams(wikiData);
     var wikiUrl = `https://en.wikipedia.org/w/api.php?${wikiParameters}`;
 
@@ -70,6 +100,40 @@ var flickrData = {
     }
 
     )}
+
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            
+
+                // creating styling for photo to sit nicely within the code
+                var contentTg = document.createElement('p'); //snippet from wikipedia
+                var wikiDesc = data.query.search[0].snippet;
+
+             
+                contentTg.setAttribute("style", 
+                "float: right; font-family: monospace; font-size: 28px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
+    
+                contentTg.innerHTML = wikiDesc + " ...";
+      
+            featuredStar.innerHTML = "";
+            for (var i = 0; i < data.query.search.length; i++) {
+                // creating styling for photo to sit nicely within the code
+                
+                var contentTg = document.createElement('p');
+                contentTg.style ="color:white"
+                var wikiDesc = data.query.search[i].snippet;
+                
+                contentTg.innerHTML = wikiDesc;
+
+
+                featuredStar.appendChild(contentTg);
+               
+            }  
+ 
+        })
+
 
 // FOR WIKI END //
 
@@ -133,7 +197,9 @@ $(document).ready(function () {
         savedItems.push(item);
 
         localStorage.setItem('savedItems', JSON.stringify(savedItems));
+
     }
-});
+
+
 
 
