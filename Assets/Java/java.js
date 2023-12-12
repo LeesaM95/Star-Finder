@@ -132,7 +132,5 @@ $(document).ready(function(){
         savedItems.push(item);
   
         localStorage.setItem('savedItems', JSON.stringify(savedItems));
-    }
-  });
+    };
   
-
