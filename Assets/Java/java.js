@@ -1,6 +1,10 @@
-
 var searchBar = document.getElementById("search-bar");
 var featuredStar = document.getElementById("featured-star");
+var srchBtn = document.getElementById("btn");
+var inputVal = document.getElementById("submitInput");
+
+var apiKeyFlickr = 'c4aaaedd99b8d8b5a0ee032443cea286';
+var flickrData = {
 var srchBtn = document.getElementById("btn");
 var inputVal = document.getElementById("submitInput");
 
@@ -12,6 +16,7 @@ var flickrData = {
     content_types: 0,
     privacy_filter: 1,
     geo_context: 2,
+    per_page: 1,
     per_page: 1,
     extras: 'owner_name,license',
     format: 'json',
@@ -42,6 +47,7 @@ function wikiSearch() {
         })
         .then(function (data) {
             console.log(data)
+
                 // creating styling for photo to sit nicely within the code
                 var contentTg = document.createElement('p'); //snippet from wikipedia
                 var wikiDesc = data.query.search[0].snippet;
@@ -51,6 +57,17 @@ function wikiSearch() {
                 "float: right; font-family: monospace; font-size: 28px; text-align: justify; color: #fff;  margin: 30px; max-width: 538px")
     
                 contentTg.innerHTML = wikiDesc + " ...";
+      
+            featuredStar.innerHTML = "";
+            for (var i = 0; i < data.query.search.length; i++) {
+                // creating styling for photo to sit nicely within the code
+                
+                var contentTg = document.createElement('p');
+                contentTg.style ="color:white"
+                var wikiDesc = data.query.search[i].snippet;
+                
+                contentTg.innerHTML = wikiDesc;
+
 
                 featuredStar.appendChild(contentTg);
                
