@@ -69,6 +69,7 @@ function wikiSearch() {
             }  
  
         })
+    }
 
 // FOR WIKI END //
 
@@ -133,4 +134,5 @@ $(document).ready(function(){
   
         localStorage.setItem('savedItems', JSON.stringify(savedItems));
     };
-  
+});
+
