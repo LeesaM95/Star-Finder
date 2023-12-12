@@ -10,7 +10,7 @@ These functions are all done through a javascript file using functions, arrays, 
 When a user opens the page, they are able to navigate to the search bar located in the upper right had corner of the page. The user can then type in the name of a celestial body, and click the 'search' button provided. The page will then load a picture of the celestial body in question, and a small snippet of information regarding it next to the photo
 
 # Visuals
-
+Screenshot of Website: https://images2.imgbox.com/02/59/mTzE475V_o.png
 
 Star-Finder Site URL: https://leesam95.github.io/Star-Finder/
 

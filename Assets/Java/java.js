@@ -50,7 +50,7 @@ function wikiSearch() {
 
 
         contentTg.setAttribute("style",
-            "float: right; font-family: monospace; font-size: 28px; text-align: justify; color: #fff;  margin: 30px 60px 30px 30px; max-width: 538px")
+            "float: right; font-family: monospace; font-size: 28px; text-align: justify; color: #fff;  margin: 30px 70px 30px 30px; max-width: 538px")
 
         contentTg.innerHTML = wikiDesc + " ...";
 
@@ -92,7 +92,7 @@ function flickrImgSearch() {
                 var imgTag = document.createElement('img');
 
 
-                imgTag.setAttribute("style", "max-width: 538px; flex-direction: column; float:left; margin: 30px -30px 30px 30px;",);
+                imgTag.setAttribute("style", "max-width: 538px; flex-direction: column; float:left; margin: 30px;",);
 
                 var serverid = data.photos.photo[i].server;
                 var id = data.photos.photo[i].id;
