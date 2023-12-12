@@ -96,7 +96,13 @@ body {
     display: block;
   }
 
-.show {display:block;}
+.dropdown-content a:hover {
+    background-color: #1D107A;
+  }
+
+.search-bar:hover .dropdown-content {
+    display: block;
+}
 
 footer{
     width:100%;

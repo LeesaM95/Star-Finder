@@ -4,10 +4,8 @@ var srchBtn = document.getElementById("btn");
 var inputVal = document.getElementById("submitInput");
 
 $(document).ready(function(){
-  // Load saved items from local storage to the dropdown
   loadSavedItems();
 
-  // Save item to local storage when the button is clicked
   $("#btn").click(function(){
       var newItem = inputVal.value;
       if (newItem) {
@@ -17,26 +15,22 @@ $(document).ready(function(){
   });
 
   function saveItem(item) {
-      // Get existing items from local storage or create an empty array
+  
       var savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
 
-      // Add the new item to the array
       savedItems.push(item);
 
-      // Save the updated array back to local storage
       localStorage.setItem('savedItems', JSON.stringify(savedItems));
   }
 
   function loadSavedItems() {
-      // Clear existing options in the dropdown
+  
       $("#savedItems").empty();
 
-      // Get saved items from local storage
       var savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
 
       var dropdown = document.getElementById('search-previous')
 
-      // Populate the dropdown with saved items
       for (var i = savedItems.length - 5; i < savedItems.length; i++) {
           $("#search-previous").append('<option value="' + savedItems[i] + '">' + savedItems[i] + '</option>');
       }
